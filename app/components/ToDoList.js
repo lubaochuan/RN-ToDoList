@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-var styles = require('./styles');
+var styles = require('../styles');
 class ToDoList extends Component {
   constructor() {
     super();

@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native'
-var styles = require('./styles');
+var styles = require('../styles');
 var t = require('tcomb-form-native');
 let Form = t.form.Form;
 
