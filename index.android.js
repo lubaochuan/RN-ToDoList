@@ -4,25 +4,45 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native';
 
-var ToDoList = require('./ToDoList');
-var ToDoEdit = require('./ToDoEdit');
+var ToDoList = require('./app/components/ToDoList');
+var ToDoEdit = require('./app/components/ToDoEdit');
 
 export default class RN_ToDoList extends Component {
   render() {
     return (
-
-      <View style={{flex:1}}>
-        <ToDoList />
-      </View>
-/*
-      <View style={{flex:1}}>
-        <ToDoEdit />
-      </View>
-*/
+      <Navigator
+        initialRoute={{id: 'ToDoList', name: 'Index'}}
+        renderScene={this.renderScene.bind(this)}
+        configureScene={(route) => {
+          if (route.sceneConfig) {
+            return route.sceneConfig;
+          }
+          return Navigator.SceneConfigs.FloatFromRight;
+        }} />
     );
+  }
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    if (routeId === 'ToDoList') {
+      return (
+        <View style={{flex:1}}>
+          <ToDoList
+            navigator={navigator} />
+        </View>
+      );
+    }
+    if (routeId === 'ToDoEdit') {
+      return (
+        <View style={{flex:1}}>
+          <ToDoEdit
+            navigator={navigator} />
+        </View>
+      );
+    }
   }
 }
 
