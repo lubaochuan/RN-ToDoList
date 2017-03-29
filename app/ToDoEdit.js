@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native'
-
+var styles = require('./styles');
 var t = require('tcomb-form-native');
 let Form = t.form.Form;
 
@@ -50,30 +50,5 @@ class ToDoEdit extends Component {
     )
   }
 }
-
-var styles = StyleSheet.create({
-  todo: {
-    marginTop: 100,
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#ffffff',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  saveButton: {
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-});
 
 module.exports = ToDoEdit;

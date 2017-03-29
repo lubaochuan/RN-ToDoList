@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-
+var styles = require('./styles');
 class ToDoList extends Component {
   constructor() {
     super();
@@ -48,46 +48,5 @@ class ToDoList extends Component {
     );
   }
 }
-
-var styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    paddingTop: 40,
-    backgroundColor: '#ffffff',
-  },
-  item: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'red',
-  },
-  text: {
-    fontSize: 18,
-    marginLeft: 5,
-    marginTop: 2,
-    color: '#222222',
-    padding: 10,
-  },
-  hr: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    height: 1,
-    marginLeft: 0,
-    marginRight: 0,
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  newButton: {
-    marginBottom: 0,
-    borderRadius: 0,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-});
 
 module.exports = ToDoList;
