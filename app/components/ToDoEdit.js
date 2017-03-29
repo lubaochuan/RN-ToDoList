@@ -5,6 +5,8 @@ import {
   Text,
   TouchableHighlight,
   StyleSheet,
+  Navigator,
+  TouchableOpacity,
 } from 'react-native'
 var styles = require('../styles');
 var t = require('tcomb-form-native');
@@ -33,6 +35,18 @@ class ToDoEdit extends Component {
 
   render() {
     return (
+      <Navigator
+        renderScene={this.renderScene.bind(this)}
+        navigator={this.props.navigator}
+        navigationBar={
+          <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
+              routeMapper={NavigationBarRouteMapper} />
+        } />
+    )
+  }
+
+  renderScene(route, navigator) {
+    return(
       <View style={styles.todo}>
         <Form
           ref="form"
@@ -47,8 +61,33 @@ class ToDoEdit extends Component {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>
-    )
+    );
   }
 }
+
+var NavigationBarRouteMapper = {
+  LeftButton(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
+          onPress={() => navigator.parentNavigator.pop()}>
+        <Text style={styles.back}>
+          {"<"}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+  RightButton(route, navigator, index, navState) {
+    return null;
+  },
+  Title(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
+        <Text style={styles.pageTitle}>
+          Edit ToDo
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+};
 
 module.exports = ToDoEdit;

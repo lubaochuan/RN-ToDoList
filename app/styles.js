@@ -51,6 +51,15 @@ var styles = StyleSheet.create({
     marginBottom: 0,
     borderRadius: 0,
   },
+  pageTitle: {
+    color: 'white',
+    margin: 10,
+    fontSize: 16,
+  },
+  back: {
+    color: 'white',
+    margin: 10,
+  },
 });
 
 module.exports = styles;
