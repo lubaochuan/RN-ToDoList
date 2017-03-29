@@ -20,8 +20,6 @@ class ToDoList extends Component {
     };
   }
 
-  openItem(){}
-
   render() {
     return (
     <View style={{flex:1}}>
@@ -44,7 +42,7 @@ class ToDoList extends Component {
         <TouchableHighlight
           style={[styles.button, styles.newButton]}
           underlayColor='#99d9f4'
-          onPress={this.openItem}>
+          onPress={this.gotoNew.bind(this)}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableHighlight>
     </View>
@@ -55,6 +53,13 @@ class ToDoList extends Component {
     this.props.navigator.push({
       id: 'ToDoEdit',
       name: 'Edit ToDo',
+    });
+  }
+
+  gotoNew() {
+    this.props.navigator.push({
+      id: 'ToDoEdit',
+      name: 'New ToDo',
     });
   }
 }
