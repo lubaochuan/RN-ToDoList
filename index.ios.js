@@ -7,8 +7,8 @@ import {
   View
 } from 'react-native';
 
-var ToDoList = require('./ToDoList');
-var ToDoEdit = require('./ToDoEdit');
+var ToDoList = require('./app/ToDoList');
+var ToDoEdit = require('./app/ToDoEdit');
 
 export default class RN_ToDoList extends Component {
   render() {
