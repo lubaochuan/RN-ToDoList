@@ -35,6 +35,14 @@ export default class RN_ToDoList extends Component {
         </View>
       );
     }
+    if (routeId === 'ToDoEdit') {
+      return (
+        <View style={{flex:1}}>
+          <ToDoEdit
+            navigator={navigator} />
+        </View>
+      );
+    }
   }
 }
 

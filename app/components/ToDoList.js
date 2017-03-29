@@ -29,11 +29,14 @@ class ToDoList extends Component {
         dataSource={this.state.dataSource}
         renderRow={(rowData) =>
           <View>
-            <View sytle={styles.item}>
-              <Text style={styles.text}>
-                {rowData.txt}
-              </Text>
-            </View>
+            <TouchableHighlight
+              onPress={this.gotoEdit.bind(this)}>
+              <View sytle={styles.item}>
+                <Text style={styles.text}>
+                  {rowData.txt}
+                  </Text>
+              </View>
+            </TouchableHighlight>
             <View style={styles.hr}/>
           </View>
         }
@@ -46,6 +49,13 @@ class ToDoList extends Component {
         </TouchableHighlight>
     </View>
     );
+  }
+
+  gotoEdit() {
+    this.props.navigator.push({
+      id: 'ToDoEdit',
+      name: 'Edit ToDo',
+    });
   }
 }
 
