@@ -8,6 +8,14 @@ import ToDoList from './ToDoList';
 import ToDoEdit from './ToDoEdit';
 
 export default class App extends Component {
+  state = {
+    items: [
+      {txt: 'Read a book', complete: false},
+      {txt: 'Take a walk', complete: true},
+      {txt: 'Do homework', complete: true},
+    ]
+  }
+
   render() {
     return (
       <Navigator
@@ -22,12 +30,14 @@ export default class App extends Component {
     );
   }
 
-  renderScene(route, navigator) {
+  renderScene = (route, navigator) => {
     var routeId = route.id;
     if (routeId === 'ToDoList') {
+      const {items} = this.state
       return (
         <View style={{flex:1}}>
           <ToDoList
+            items={items}
             navigator={navigator} />
         </View>
       );

@@ -9,16 +9,30 @@ import {
 } from 'react-native';
 var styles = require('../styles');
 
+// Row comparison function
+// source: http://www.reactnativeexpress.com/listview
+const rowHasChanged = (row1, row2) => row1 !== row2
+
+// DataSource template object
+const ds = new ListView.DataSource({rowHasChanged})
+
 export default class ToDoList extends Component {
-  constructor() {
-    super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: ds.cloneWithRows([
-        {txt: 'Read a book', complete: false},
-        {txt: 'Take a walk', complete: true}
-      ]),
-    };
+  state = {
+    dataSource: ds.cloneWithRows(this.props.items)
+  }
+
+  renderItem = (rawData) => {
+    return (
+      <TouchableHighlight
+        style={styles.item}
+        onPress={this.gotoEdit.bind(this)}>
+        <View sytle={styles.item}>
+          <Text style={styles.text}>
+            {rawData.txt}
+          </Text>
+        </View>
+      </TouchableHighlight>
+    )
   }
 
   render() {
@@ -26,19 +40,7 @@ export default class ToDoList extends Component {
     <View style={{flex:1}}>
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(rowData) =>
-          <View>
-            <TouchableHighlight
-              onPress={this.gotoEdit.bind(this)}>
-              <View sytle={styles.item}>
-                <Text style={styles.text}>
-                  {rowData.txt}
-                  </Text>
-              </View>
-            </TouchableHighlight>
-            <View style={styles.hr}/>
-          </View>
-        }
+        renderRow={this.renderItem}
         style={styles.list}/>
         <TouchableHighlight
           style={[styles.button, styles.newButton]}
