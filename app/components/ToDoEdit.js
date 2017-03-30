@@ -24,7 +24,7 @@ var options = {
   }
 };
 
-class ToDoEdit extends Component {
+export default class ToDoEdit extends Component {
   constructor() {
     super();
     //this.onUpdate = this.onUpdate.bind(this);

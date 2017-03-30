@@ -8,7 +8,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 var styles = require('../styles');
-class ToDoList extends Component {
+
+export default class ToDoList extends Component {
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
