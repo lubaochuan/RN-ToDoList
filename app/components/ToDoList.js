@@ -21,14 +21,14 @@ export default class ToDoList extends Component {
     dataSource: ds.cloneWithRows(this.props.items)
   }
 
-  renderItem = (rawData) => {
+  renderItem = (rowData, sectionID, rowID) => {
     return (
       <TouchableHighlight
         style={styles.item}
-        onPress={this.gotoEdit.bind(this)}>
+        onPress={() => this.props.onPressItem(rowData, rowID)}>
         <View sytle={styles.item}>
           <Text style={styles.text}>
-            {rawData.txt}
+            {rowData.txt}
           </Text>
         </View>
       </TouchableHighlight>
@@ -45,25 +45,11 @@ export default class ToDoList extends Component {
         <TouchableHighlight
           style={[styles.button, styles.newButton]}
           underlayColor='#99d9f4'
-          onPress={this.gotoNew.bind(this)}>
+          onPress={this.props.onPressItem}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableHighlight>
     </View>
     );
-  }
-
-  gotoEdit() {
-    this.props.navigator.push({
-      id: 'ToDoEdit',
-      name: 'Edit ToDo',
-    });
-  }
-
-  gotoNew() {
-    this.props.navigator.push({
-      id: 'ToDoEdit',
-      name: 'New ToDo',
-    });
   }
 }
 

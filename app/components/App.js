@@ -1,11 +1,10 @@
 'use strict';
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   View,
   Navigator,
-} from 'react-native';
-import ToDoList from './ToDoList';
-import ToDoEdit from './ToDoEdit';
+} from 'react-native'
+import ToDoList from './ToDoList'
 
 export default class App extends Component {
   state = {
@@ -16,39 +15,23 @@ export default class App extends Component {
     ]
   }
 
-  render() {
-    return (
-      <Navigator
-        initialRoute={{id: 'ToDoList', name: 'Index'}}
-        renderScene={this.renderScene.bind(this)}
-        configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig;
-          }
-          return Navigator.SceneConfigs.FloatFromRight;
-        }} />
-    );
+  openItem=(rowData, rowID) => {
+    this.props.navigator.push({
+      id: 'ToDoEdit',
+      item: rowData,
+    });
   }
 
-  renderScene = (route, navigator) => {
-    var routeId = route.id;
-    if (routeId === 'ToDoList') {
-      const {items} = this.state
-      return (
-        <View style={{flex:1}}>
-          <ToDoList
-            items={items}
-            navigator={navigator} />
-        </View>
-      );
-    }
-    if (routeId === 'ToDoEdit') {
-      return (
-        <View style={{flex:1}}>
-          <ToDoEdit
-            navigator={navigator} />
-        </View>
-      );
-    }
+  updateItem(item, index) {}
+  deleteItem(index) {}
+
+  render() {
+    const {items} = this.state
+    return (
+      <ToDoList
+        items={items}
+        onPressItem={this.openItem}
+        navigator={navigator} />
+    );
   }
 }

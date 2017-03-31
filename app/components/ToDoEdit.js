@@ -40,7 +40,7 @@ export default class ToDoEdit extends Component {
         navigator={this.props.navigator}
         navigationBar={
           <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
-              routeMapper={NavigationBarRouteMapper} />
+              routeMapper={NavigationBarRouteMapper(this.props)} />
         } />
     )
   }
@@ -53,7 +53,7 @@ export default class ToDoEdit extends Component {
           type={ToDo}
           onChange={this.onChange}
           options={options}
-          value={[]}/>
+          value={this.props.item}/>
         <TouchableHighlight
           style={[styles.button, styles.saveButton]}
           onPress={this.onUpdate}
@@ -65,7 +65,7 @@ export default class ToDoEdit extends Component {
   }
 }
 
-var NavigationBarRouteMapper = {
+var NavigationBarRouteMapper = props => ({
   LeftButton(route, navigator, index, navState) {
     return (
       <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
@@ -83,11 +83,11 @@ var NavigationBarRouteMapper = {
     return (
       <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
         <Text style={styles.pageTitle}>
-          Edit ToDo
+          {props.item.txt || 'New Item'}
         </Text>
       </TouchableOpacity>
     );
   }
-};
+})
 
 module.exports = ToDoEdit;
