@@ -8,9 +8,10 @@ import {
   Navigator,
   TouchableOpacity,
 } from 'react-native'
-var styles = require('../styles');
-var t = require('tcomb-form-native');
-let Form = t.form.Form;
+import Title from './Title'
+var styles = require('../styles')
+var t = require('tcomb-form-native')
+let Form = t.form.Form
 
 var ToDo = t.struct({txt: t.Str, complete: t.Bool});
 

@@ -29,9 +29,7 @@ class RN_ToDoList extends Component {
     var routeId = route.id;
     if (routeId === 'ToDoList') {
       return (
-        <View style={{flex:1}}>
-          <App navigator={navigator} />
-        </View>
+        <App navigator={navigator} />
       );
     }
     if (routeId === 'ToDoEdit') {

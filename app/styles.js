@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 var styles = StyleSheet.create({
   list: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 20,
     backgroundColor: '#ffffff',
   },
   item: {
@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
     marginRight: 0,
   },
   todo: {
-    marginTop: 100,
+    marginTop: 60,
     flex: 1,
     padding: 10,
     backgroundColor: '#ffffff',
@@ -52,14 +52,23 @@ var styles = StyleSheet.create({
     borderRadius: 0,
   },
   pageTitle: {
+     color: 'white',
+     margin: 10,
+  },
+  title: {
     color: 'white',
-    margin: 10,
+    textAlign: 'center',
+    marginTop: 10,
     fontSize: 16,
   },
   back: {
     color: 'white',
     margin: 10,
   },
+  header: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    padding: 15,
+  }
 });
 
 module.exports = styles;

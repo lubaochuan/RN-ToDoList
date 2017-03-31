@@ -5,6 +5,7 @@ import {
   Navigator,
 } from 'react-native'
 import ToDoList from './ToDoList'
+import Title from './Title'
 
 export default class App extends Component {
   state = {
@@ -28,10 +29,13 @@ export default class App extends Component {
   render() {
     const {items} = this.state
     return (
-      <ToDoList
-        items={items}
-        onPressItem={this.openItem}
-        navigator={navigator} />
+      <View style={{flex:1}}>
+        <Title> TO DOs </Title>
+        <ToDoList
+          items={items}
+          onPressItem={this.openItem}
+          navigator={navigator} />
+      </View>
     );
   }
 }
