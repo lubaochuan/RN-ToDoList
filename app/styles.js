@@ -19,6 +19,9 @@ var styles = StyleSheet.create({
     color: '#222222',
     padding: 10,
   },
+  completed: {
+    color: '#cccccc'
+  },
   hr: {
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     height: 1,
@@ -59,7 +62,7 @@ var styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     marginTop: 10,
-    fontSize: 16,
+    fontSize: 18,
   },
   back: {
     color: 'white',

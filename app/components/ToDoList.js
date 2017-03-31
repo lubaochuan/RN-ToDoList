@@ -17,18 +17,15 @@ const rowHasChanged = (row1, row2) => row1 !== row2
 const ds = new ListView.DataSource({rowHasChanged})
 
 export default class ToDoList extends Component {
-  state = {
-    dataSource: ds.cloneWithRows(this.props.items)
-  }
-
   renderItem = (rowData, sectionID, rowID) => {
+    const {txt, complete} = rowData
     return (
       <TouchableHighlight
         style={styles.item}
         onPress={() => this.props.onPressItem(rowData, rowID)}>
         <View sytle={styles.item}>
-          <Text style={styles.text}>
-            {rowData.txt}
+          <Text style={[styles.text, complete && styles.completed]}>
+            {txt}
           </Text>
         </View>
       </TouchableHighlight>
@@ -36,10 +33,12 @@ export default class ToDoList extends Component {
   }
 
   render() {
+    var dataSource = ds.cloneWithRows(this.props.items);
+
     return (
     <View style={{flex:1}}>
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={dataSource}
         renderRow={this.renderItem}
         style={styles.list}/>
         <TouchableHighlight

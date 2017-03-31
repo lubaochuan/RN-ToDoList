@@ -8,8 +8,8 @@ import {
   Navigator,
   TouchableOpacity,
 } from 'react-native'
-import Title from './Title'
 var styles = require('../styles')
+import InputForm from './InputForm'
 var t = require('tcomb-form-native')
 let Form = t.form.Form
 
@@ -31,37 +31,24 @@ export default class ToDoEdit extends Component {
     //this.onUpdate = this.onUpdate.bind(this);
   }
 
-  onChange() {}
-  onUpdate() {}
-
   render() {
     return (
       <Navigator
-        renderScene={this.renderScene.bind(this)}
+        renderScene={this.renderScene}
         navigator={this.props.navigator}
         navigationBar={
-          <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
+          <Navigator.NavigationBar style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}}
               routeMapper={NavigationBarRouteMapper(this.props)} />
         } />
     )
   }
 
-  renderScene(route, navigator) {
+  renderScene=(route, navigator) => {
     return(
-      <View style={styles.todo}>
-        <Form
-          ref="form"
-          type={ToDo}
-          onChange={this.onChange}
-          options={options}
-          value={this.props.item}/>
-        <TouchableHighlight
-          style={[styles.button, styles.saveButton]}
-          onPress={this.onUpdate}
-          underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableHighlight>
-      </View>
+      <InputForm
+        item={this.props.item}
+        id={this.props.id}
+        onUpdate={this.props.onUpdate}/>
     );
   }
 }
