@@ -26,18 +26,18 @@ class RN_ToDoList extends Component {
   }
 
   renderScene = (route, navigator) => {
-    var routeId = route.id;
+    var routeId = route.id
+
     if (routeId === 'ToDoList') {
       return (
-        <View style={{flex:1}}>
-          <App navigator={navigator} />
-        </View>
+        <App navigator={navigator} />
       );
     }
     if (routeId === 'ToDoEdit') {
+      const {item, id, update} = route.passProps
       return (
         <View style={{flex:1}}>
-          <ToDoEdit navigator={navigator} item={route.item} />
+          <ToDoEdit navigator={navigator} item={item} id={id} onUpdate={update} />
         </View>
       );
     }
