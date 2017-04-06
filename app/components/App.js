@@ -4,18 +4,15 @@ import {
   View,
   Navigator,
 } from 'react-native'
+import { actionCreators } from '../todoListRedux'
 import ToDoList from './ToDoList'
 import Title from './Title'
 
-export default class App extends Component {
-  state = {
-    items: [
-      {txt: 'Read a book', complete: false},
-      {txt: 'Take a walk', complete: true},
-      {txt: 'Do homework', complete: true},
-    ]
-  }
+const mapStateToProps = (state) => ({
+  items: state.items,
+})
 
+class App extends Component {
   openItem=(rowData, rowID) => {
     this.props.navigator.push({
       id: 'ToDoEdit',
@@ -24,24 +21,20 @@ export default class App extends Component {
   }
 
   updateItem=(item, index) => {
-    const {items} = this.state
-    //console.log("updated item:"+JSON.stringify(item))
-    //console.log("item index:"+index)
+    const {dispatch} = this.props
+    dispath(actionCreators.update(item,))
     if (index) {
-      items[index] = item
+      dispath(actionCreators.update(item, index))
     }else {
-      items.push(item)
+      dispath(actionCreators.add(item))
     }
-    //console.log("items in new state:"+JSON.stringify(items))
-    this.setState({items: items})
-
     this.props.navigator.pop()
   }
 
   deleteItem(index) {}
 
   render() {
-    const {items} = this.state
+    const {items} = this.props
 
     return (
       <View style={{flex:1}}>
@@ -55,3 +48,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(App)

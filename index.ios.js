@@ -1,12 +1,19 @@
 'use strict';
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
   Navigator,
-} from 'react-native';
+} from 'react-native'
+import { createStore } from "redux"
+import { Provider } from 'react-redux'
+
+// Import the reducer and create a store
+import { reducer } from './app/todoListRedux'
+const store = createStore(reducer)
+
 import App from './app/components/App'
 import ToDoEdit from './app/components/ToDoEdit'
 
@@ -30,7 +37,9 @@ class RN_ToDoList extends Component {
 
     if (routeId === 'ToDoList') {
       return (
-        <App navigator={navigator} />
+        <Provider store={store}>
+          <App navigator={navigator} />
+        </Provider>
       );
     }
     if (routeId === 'ToDoEdit') {
