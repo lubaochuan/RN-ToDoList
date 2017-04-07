@@ -37,7 +37,7 @@ export default class ToDoEdit extends Component {
         renderScene={this.renderScene}
         navigator={this.props.navigator}
         navigationBar={
-          <Navigator.NavigationBar style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}}
+          <Navigator.NavigationBar style={styles.header}
               routeMapper={NavigationBarRouteMapper(this.props)} />
         } />
     )

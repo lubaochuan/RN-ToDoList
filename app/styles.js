@@ -23,7 +23,7 @@ var styles = StyleSheet.create({
     color: '#cccccc'
   },
   hr: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: '#48BBEC',
     height: 1,
     marginLeft: 0,
     marginRight: 0,
@@ -69,7 +69,7 @@ var styles = StyleSheet.create({
     margin: 10,
   },
   header: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: '#48BBEC',
     padding: 15,
   }
 });
