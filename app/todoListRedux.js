@@ -49,7 +49,7 @@ export const reducer = (state = initialState, action) => {
       items[payload.index] = payload.item
       return {
         ...state,
-        items: items,
+        items: [...items],
       }
     }
     case types.REMOVE: {
