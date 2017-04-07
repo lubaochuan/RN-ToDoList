@@ -33,7 +33,8 @@ export default class ToDoList extends Component {
   }
 
   render() {
-    var dataSource = ds.cloneWithRows(this.props.items);
+    const {items} = this.props
+    const dataSource = ds.cloneWithRows(items);
 
     return (
     <View style={{flex:1}}>

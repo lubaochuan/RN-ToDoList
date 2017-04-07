@@ -4,6 +4,8 @@ import {
   View,
   Navigator,
 } from 'react-native'
+import { connect } from 'react-redux'
+
 import { actionCreators } from '../todoListRedux'
 import ToDoList from './ToDoList'
 import Title from './Title'
@@ -22,11 +24,11 @@ class App extends Component {
 
   updateItem=(item, index) => {
     const {dispatch} = this.props
-    dispath(actionCreators.update(item,))
+
     if (index) {
-      dispath(actionCreators.update(item, index))
+      dispatch(actionCreators.update(item, index))
     }else {
-      dispath(actionCreators.add(item))
+      dispatch(actionCreators.add(item))
     }
     this.props.navigator.pop()
   }
