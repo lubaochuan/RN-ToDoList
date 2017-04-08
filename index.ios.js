@@ -6,13 +6,19 @@ import {
   Text,
   View,
   Navigator,
+  AsyncStorage,
 } from 'react-native'
 import { createStore } from "redux"
 import { Provider } from 'react-redux'
+import { persistStore, autoRehydrate } from 'redux-persist'
 
-// Import the reducer and create a store
 import { reducer } from './app/todoListRedux'
-const store = createStore(reducer)
+
+// Add the autoRehydrate middleware to your redux store
+const store = createStore(reducer, undefined, autoRehydrate())
+
+// Enable persistence
+persistStore(store, {storage: AsyncStorage})
 
 import App from './app/components/App'
 import ToDoEdit from './app/components/ToDoEdit'

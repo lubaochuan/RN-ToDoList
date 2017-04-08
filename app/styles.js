@@ -7,11 +7,6 @@ var styles = StyleSheet.create({
     paddingTop: 20,
     backgroundColor: '#ffffff',
   },
-  item: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'red',
-  },
   text: {
     fontSize: 18,
     marginLeft: 5,

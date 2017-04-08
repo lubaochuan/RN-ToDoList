@@ -25,3 +25,10 @@ npm install redux react-redux --save
 ```
 The recipe can be found at http://www.reactnativeexpress.com/redux
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/8c3cbdc95781bf75e579659a21756a6b2412391e)
+
+# Step 5
+Use redux-persist to persist state to local storage. Add the libraries to the project first:
+```
+npm install redux-persist --save
+```
+The recipe can be found at http://www.reactnativeexpress.com/redux_persist
