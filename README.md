@@ -19,6 +19,9 @@ Add a container component to manage state and implement business logic.
 The recipe can be found at http://www.reactnativeexpress.com/data_component_state
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/68cb817f060a09e6296fa3a7f8b93236ee1186af)
 # Step 4
-Use Redux and React Redux to manage state.
+Use Redux and React Redux to manage state. Add the libraries to the project first:
+```
+npm install redux react-redux --save
+```
 The recipe can be found at http://www.reactnativeexpress.com/redux
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/8c3cbdc95781bf75e579659a21756a6b2412391e)
