@@ -36,4 +36,4 @@ npm install redux-persist --save
 ```
 The recipe can be found at http://www.reactnativeexpress.com/redux_persist
 
-[solution](https://github.com/lubaochuan/RN-ToDoList/tree/cf23cec36ae2adfe99c48124aa8a992e48e9b9e7)
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/aa9e1499998c88b19d3a96bb5e27e0487c48f82e)
