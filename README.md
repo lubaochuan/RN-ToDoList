@@ -35,3 +35,5 @@ Use redux-persist to persist state to local storage. Add the libraries to the pr
 npm install redux-persist --save
 ```
 The recipe can be found at http://www.reactnativeexpress.com/redux_persist
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/cf23cec36ae2adfe99c48124aa8a992e48e9b9e7)

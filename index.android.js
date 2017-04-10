@@ -1,12 +1,25 @@
 'use strict';
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
   Navigator,
-} from 'react-native';
+  AsyncStorage,
+} from 'react-native'
+import { createStore } from "redux"
+import { Provider } from 'react-redux'
+import { persistStore, autoRehydrate } from 'redux-persist'
+
+import { reducer } from './app/todoListRedux'
+
+// Add the autoRehydrate middleware to your redux store
+const store = createStore(reducer, undefined, autoRehydrate())
+
+// Enable persistence
+persistStore(store, {storage: AsyncStorage})
+
 import App from './app/components/App'
 import ToDoEdit from './app/components/ToDoEdit'
 
@@ -30,7 +43,9 @@ class RN_ToDoList extends Component {
 
     if (routeId === 'ToDoList') {
       return (
-        <App navigator={navigator} />
+        <Provider store={store}>
+          <App navigator={navigator} />
+        </Provider>
       );
     }
     if (routeId === 'ToDoEdit') {
