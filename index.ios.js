@@ -8,14 +8,17 @@ import {
   Navigator,
   AsyncStorage,
 } from 'react-native'
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { Provider } from 'react-redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
+import { createLogger } from 'redux-logger'
 
 import { reducer } from './app/todoListRedux'
 
+const logger = createLogger()
+
 // Add the autoRehydrate middleware to your redux store
-const store = createStore(reducer, undefined, autoRehydrate())
+const store = createStore(reducer, applyMiddleware(logger), autoRehydrate())
 
 // Enable persistence
 persistStore(store, {storage: AsyncStorage})

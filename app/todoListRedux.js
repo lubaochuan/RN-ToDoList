@@ -54,6 +54,7 @@ export const reducer = (state = initialState, action) => {
     }
     case types.DELETE: {
       console.log("delete index:"+payload)
+      console.log(JSON.stringify(items.filter((todo, i) => i !== payload)))
       return {
         ...state,
         items: items.filter((todo, i) => i !== payload),
