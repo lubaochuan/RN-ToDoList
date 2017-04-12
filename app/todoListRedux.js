@@ -2,7 +2,7 @@
 export const types = {
   ADD: 'ADD',
   UPDATE: 'UPDATE',
-  REMOVE: 'REMOVE',
+  DELETE: 'DELETE',
 }
 
 // Helper functions to dispatch actions, optionally with payloads
@@ -13,8 +13,8 @@ export const actionCreators = {
   update: (item, index) => {
     return {type: types.UPDATE, payload: {item: item, index: index}}
   },
-  remove: (index) => {
-    return {type: types.REMOVE, payload: index}
+  delete: (index) => {
+    return {type: types.DELETE, payload: index}
   }
 }
 
@@ -52,7 +52,8 @@ export const reducer = (state = initialState, action) => {
         items: [...items],
       }
     }
-    case types.REMOVE: {
+    case types.DELETE: {
+      console.log("delete index:"+payload)
       return {
         ...state,
         items: items.filter((todo, i) => i !== payload),

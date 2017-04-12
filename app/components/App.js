@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {
   View,
   Navigator,
+  Alert,
 } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -33,7 +34,24 @@ class App extends Component {
     this.props.navigator.pop()
   }
 
-  deleteItem(index) {}
+  /*https://facebook.github.io/react-native/docs/alert.html*/
+  alertMenu=(rowData, rowID) => {
+    Alert.alert(
+      'Quick Menu',
+      null,
+      [
+        {text: 'Delete', onPress: ()=>this.deleteItem(rowID)},
+        {text: 'Edit', onPress: ()=>this.openItem(rowData, rowID)},
+        {text: 'Cancel'}
+      ],
+      { cancelable: false }
+    )
+  }
+
+  deleteItem=(index) => {
+    const {dispatch} = this.props
+    dispatch(actionCreators.delete(index))
+  }
 
   render() {
     const {items} = this.props
@@ -43,8 +61,9 @@ class App extends Component {
         <Title> TO DOs </Title>
         <ToDoList
           items={items}
-          onPressItem={this.openItem}
+          onOpenItem={this.openItem}
           onUpdateItem={this.updateItem}
+          onDeleteItem={this.alertMenu}
           navigator={navigator} />
       </View>
     );

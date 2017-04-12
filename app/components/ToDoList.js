@@ -22,7 +22,8 @@ export default class ToDoList extends Component {
     return (
       <TouchableHighlight
         style={styles.item}
-        onPress={() => this.props.onPressItem(rowData, rowID)}>
+        onPress={() => this.props.onOpenItem(rowData, rowID)}
+        onLongPress={() => this.props.onDeleteItem(rowData, rowID)}>
         <View sytle={styles.item}>
           <Text style={[styles.text, complete && styles.completed]}>
             {txt}
@@ -45,7 +46,7 @@ export default class ToDoList extends Component {
         <TouchableHighlight
           style={[styles.button, styles.newButton]}
           underlayColor='#99d9f4'
-          onPress={this.props.onPressItem}>
+          onPress={this.props.onOpenItem}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableHighlight>
     </View>
