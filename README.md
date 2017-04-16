@@ -46,3 +46,8 @@ npm install redux-logger --save
 The recipe can be found at https://github.com/evgenyrodionov/redux-logger
 
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/20cbd3b1fbc67703d832bf059a1d8db7c3f3e91f)
+
+# Step 7
+Use delete action to remove existing to-do items. An `Alert` menu prompts the user to confirm a delete action.
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/a50b05ea66d82dae8361da24f80c45637943e96c)
