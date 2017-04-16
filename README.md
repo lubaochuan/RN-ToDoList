@@ -37,3 +37,12 @@ npm install redux-persist --save
 The recipe can be found at http://www.reactnativeexpress.com/redux_persist
 
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/aa9e1499998c88b19d3a96bb5e27e0487c48f82e)
+
+# Step 6
+With Redux in place logging state transitions is simple with the redux-logger library. Add the library to the project first:
+```
+npm install redux-logger --save
+```
+The recipe can be found at https://github.com/evgenyrodionov/redux-logger
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/20cbd3b1fbc67703d832bf059a1d8db7c3f3e91f)
