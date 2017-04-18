@@ -51,3 +51,9 @@ The recipe can be found at https://github.com/evgenyrodionov/redux-logger
 Use delete action to remove existing to-do items. An `Alert` menu prompts the user to confirm a delete action.
 
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/a50b05ea66d82dae8361da24f80c45637943e96c)
+
+# Step 8
+Use redux-thunk to fetch todos from a Web API.
+```
+npm install redux-thunk --save
+```

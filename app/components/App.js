@@ -4,18 +4,27 @@ import {
   View,
   Navigator,
   Alert,
+  ActivityIndicator
 } from 'react-native'
 import { connect } from 'react-redux'
+var styles = require('../styles')
 
 import { actionCreators } from '../todoListRedux'
 import ToDoList from './ToDoList'
 import Title from './Title'
 
 const mapStateToProps = (state) => ({
+  loading: state.loading,
+  error: state.error,
   items: state.items,
 })
 
 class App extends Component {
+  componentWillMount() {
+    const {dispatch} = this.props
+    dispatch(actionCreators.fetchTodos())
+  }
+
   openItem=(rowData, rowID) => {
     this.props.navigator.push({
       id: 'ToDoEdit',
@@ -54,7 +63,25 @@ class App extends Component {
   }
 
   render() {
-    const {items} = this.props
+    const {items, loading, error} = this.props
+
+    if (loading) {
+      return (
+        <View style={styles.center}>
+          <ActivityIndicator animating={true} />
+        </View>
+      )
+    }
+
+    if (error) {
+      return (
+        <View style={styles.center}>
+          <Text>
+            Failed to load posts!
+          </Text>
+        </View>
+      )
+    }
 
     return (
       <View style={{flex:1}}>

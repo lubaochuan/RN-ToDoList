@@ -3,6 +3,8 @@ export const types = {
   ADD: 'ADD',
   UPDATE: 'UPDATE',
   DELETE: 'DELETE',
+  FETCH_TODOS_REQUEST: 'FETCH_TODOS_REQUEST',
+  FETCH_TODOS_RESPONSE: 'FETCH_TODOS_RESPONSE',
 }
 
 // Helper functions to dispatch actions, optionally with payloads
@@ -15,11 +17,25 @@ export const actionCreators = {
   },
   delete: (index) => {
     return {type: types.DELETE, payload: index}
-  }
+  },
+  fetchTodos: () => async (dispatch, getState) => {
+    dispatch({type: types.FETCH_TODOS_REQUEST})
+    try {
+      const response = await fetch('https://58f4d4d2faec4c1200c0eed8.mockapi.io/todos')
+      const items = await response.json()
+      console.log(JSON.stringify(items))
+
+      dispatch({type: types.FETCH_TODOS_RESPONSE, payload: items})
+    } catch (e) {
+      dispatch({type: types.FETCH_TODOS_RESPONSE, payload: e, error: true})
+    }
+  },
 }
 
 // Initial state of the store
 const initialState = {
+  loading: true,
+  error: false,
   items: [
     {txt: 'Read a book', complete: false},
     {txt: 'Take a walk', complete: true},
@@ -36,9 +52,30 @@ const initialState = {
 //   return the initial state of the app in this case.
 export const reducer = (state = initialState, action) => {
   const {items} = state
-  const {type, payload} = action
+  const {type, payload, error} = action
 
   switch (type) {
+    case types.FETCH_TODOS_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: false
+      }
+    }
+    case types.FETCH_TODOS_RESPONSE: {
+      if (error) {
+        return {
+          ...state,
+          loading:false,
+          error: true
+        }
+      }
+      return {
+        ...state,
+        loading: false,
+        items: [...items, ...payload]
+      }
+    }
     case types.ADD: {
       return {
         ...state,

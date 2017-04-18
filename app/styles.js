@@ -66,7 +66,12 @@ var styles = StyleSheet.create({
   header: {
     backgroundColor: '#48BBEC',
     padding: 15,
-  }
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 module.exports = styles;
