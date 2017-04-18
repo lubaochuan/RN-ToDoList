@@ -57,3 +57,6 @@ Use redux-thunk to fetch todos from a Web API.
 ```
 npm install redux-thunk --save
 ```
+The recipe can be found at http://www.reactnativeexpress.com/networking_redux
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/e830053bfa4e498b01214a95946c3c3720082265)
