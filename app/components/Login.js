@@ -93,6 +93,32 @@ export default class Login extends Component {
     }
   }
 
+  //https://firebase.google.com/docs/auth/web/manage-users
+  handleResetPassword= () => {
+    if (this.state.value.email) {
+      try {
+        firebaseApp.auth().sendPasswordResetEmail(this.state.value.email)
+        .then(() => {
+          this.setState({
+            response: "Reset email sent!"
+          });
+        }, function(error) {
+          this.setState({
+            response: error.toString()
+          })
+        });
+      } catch (error) {
+        this.setState({
+          response: error.toString()
+        })
+      }
+    }else{
+      this.setState({
+        response: "Please enter your email."
+      })
+    }
+  }
+
   render() {
     return(
       <View style={styles.todo}>
@@ -113,6 +139,12 @@ export default class Login extends Component {
           onPress={this.handleRegister}
           underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Register</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={[styles.button, styles.saveButton, {marginTop: 10}]}
+          onPress={this.handleResetPassword}
+          underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Reset Passwrod</Text>
         </TouchableHighlight>
         <View>
           <Text style={{textAlign: "center", padding: 10}}>
