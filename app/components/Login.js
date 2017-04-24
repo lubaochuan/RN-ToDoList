@@ -52,19 +52,23 @@ export default class Login extends Component {
     this.setState({value})
   }
 
+  clearForm() {
+    this.setState({
+      value: null,
+      response: ''})
+  }
+
   handleRegister= async () => {
     try {
       await firebaseApp.auth().createUserWithEmailAndPassword(
         this.state.value.email, this.state.value.password)
       this.setState({
-        response: "account created"
+        response: 'Success! Your account is created.'
       });
-      alert('Success! Your account is created.')
     } catch (error) {
       this.setState({
         response: error.toString()
       })
-      alert('There was an error creating your account.')
     }
   }
 
@@ -75,7 +79,7 @@ export default class Login extends Component {
       this.setState({
         response: "Logged In!"
       });
-      alert('You are logged in.')
+      this.clearForm()
 
       setTimeout(() => {
         this.props.navigator.push({

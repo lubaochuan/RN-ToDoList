@@ -34,20 +34,39 @@ persistStore(store, {storage: AsyncStorage})
 import App from './app/components/App'
 import ToDoEdit from './app/components/ToDoEdit'
 import Login from './app/components/Login'
+import { firebaseApp } from './app/firebase/firebaseApp'
 
 class RN_ToDoList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      userLoaded: false,
+      initialView: null
+    }
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      let initialView = user ? "ToDoList" : "Login";
+      this.setState({
+        userLoaded: true,
+        initialView: initialView
+      })
+    });
+  }
+
   render() {
-    return (
-      <Navigator
-        initialRoute={{id: 'Login'}}
-        renderScene={this.renderScene.bind(this)}
-        configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig;
-          }
-          return Navigator.SceneConfigs.FloatFromRight;
-        }} />
-    );
+    if (this.state.userLoaded) {
+      return (
+        <Navigator
+          initialRoute={{id: this.state.initialView}}
+          renderScene={this.renderScene}
+          configureScene={(route) => {
+            if (route.sceneConfig) {
+              return route.sceneConfig;
+            }
+            return Navigator.SceneConfigs.FloatFromRight;
+          }}/>)
+    } else {
+      return null
+    }
   }
 
   renderScene = (route, navigator) => {

@@ -2,16 +2,19 @@
 import React, { Component } from 'react'
 import {
   View,
+  Text,
   Navigator,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
 var styles = require('../styles')
 
 import { actionCreators } from '../todoListRedux'
 import ToDoList from './ToDoList'
-import Title from './Title'
+import { firebaseApp } from '../firebase/firebaseApp'
+//import Title from './Title'
 
 const mapStateToProps = (state) => ({
   loading: state.loading,
@@ -62,6 +65,18 @@ class App extends Component {
     dispatch(actionCreators.delete(index))
   }
 
+  logout= async () => {
+    console.log('try to logout')
+    try {
+      await firebaseApp.auth().signOut();
+      this.props.navigator.push({
+        name: "Login"
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
     const {items, loading, error} = this.props
 
@@ -77,24 +92,69 @@ class App extends Component {
       return (
         <View style={styles.center}>
           <Text>
-            Failed to load posts!
+            Failed to load items!
           </Text>
         </View>
       )
     }
 
     return (
+      <Navigator
+        renderScene={this.renderScene}
+        navigator={this.props.navigator}
+        navigationBar={
+          <Navigator.NavigationBar style={styles.header}
+              routeMapper={NavigationBarRouteMapper(this.props)} />
+        }
+      />
+    );
+  }
+
+  renderScene=(route, navigator) => {
+    return (
       <View style={{flex:1}}>
-        <Title> TO DOs </Title>
         <ToDoList
-          items={items}
+          items={this.props.items}
           onOpenItem={this.openItem}
           onUpdateItem={this.updateItem}
           onDeleteItem={this.alertMenu}
           navigator={navigator} />
-      </View>
-    );
+      </View>);
   }
 }
+
+const NavigationBarRouteMapper = props => ({
+  LeftButton(route, navigator, index, navState) {
+    return null
+  },
+  RightButton(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
+          onPress={
+            async () => {
+              console.log('try to logout')
+              try {
+                await firebaseApp.auth().signOut();
+                navigator.parentNavigator.pop()
+              } catch (error) {
+                console.log(error);
+              }
+            }}>
+        <Text style={styles.back}>
+          {"Log Out"}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+  Title(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
+        <Text style={styles.pageTitle}>
+          {'TO DOs'}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+})
 
 export default connect(mapStateToProps)(App)
