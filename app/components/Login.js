@@ -144,7 +144,7 @@ export default class Login extends Component {
           style={[styles.button, styles.saveButton, {marginTop: 10}]}
           onPress={this.handleResetPassword}
           underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Reset Passwrod</Text>
+          <Text style={styles.buttonText}>Reset Password</Text>
         </TouchableHighlight>
         <View>
           <Text style={{textAlign: "center", padding: 10}}>
