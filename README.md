@@ -60,3 +60,14 @@ npm install redux-thunk --save
 The recipe can be found at http://www.reactnativeexpress.com/networking_redux
 
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/e830053bfa4e498b01214a95946c3c3720082265)
+# Step 9
+Use firebase for user authentication. We will use `tcomb-form-native` to create the input form.
+```
+npm install firebase --save
+npm install tcomb-form-native --save
+```
+You need to create a [Firebase app](https://firebase.google.com/) and enable email user authentication via email.
+```
+cp config.js.example config.js
+```
+Update config.js with your Firebase app credentials.

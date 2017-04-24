@@ -33,12 +33,13 @@ persistStore(store, {storage: AsyncStorage})
 
 import App from './app/components/App'
 import ToDoEdit from './app/components/ToDoEdit'
+import Login from './app/components/Login'
 
 class RN_ToDoList extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{id: 'ToDoList', name: 'Index'}}
+        initialRoute={{id: 'Login'}}
         renderScene={this.renderScene.bind(this)}
         configureScene={(route) => {
           if (route.sceneConfig) {
@@ -52,6 +53,11 @@ class RN_ToDoList extends Component {
   renderScene = (route, navigator) => {
     var routeId = route.id
 
+    if (routeId === 'Login') {
+      return (
+        <Login navigator={navigator} />
+      );
+    }
     if (routeId === 'ToDoList') {
       return (
         <Provider store={store}>
