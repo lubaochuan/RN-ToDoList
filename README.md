@@ -66,7 +66,7 @@ Use firebase for user authentication. We will use `tcomb-form-native` to create 
 npm install firebase --save
 npm install tcomb-form-native --save
 ```
-You need to create a [Firebase app](https://firebase.google.com/) and enable email user authentication via email.
+You need to create a [Firebase app](https://firebase.google.com/) and enable [user authentication via email](https://cdn-images-1.medium.com/max/1600/1*jiTjs8uGm2YzUGhVscZnfQ.png).
 ```
 cp config.js.example config.js
 ```
