@@ -11,7 +11,7 @@ const initialState = {
   ]
 }
 
-export const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   const {items} = state
   const {type, payload, error} = action
 

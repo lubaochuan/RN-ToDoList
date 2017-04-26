@@ -23,10 +23,6 @@ const mapStateToProps = (state) => ({
   items: state.items,
 })
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ItemsActions, dispatch)
-}
-
 class App extends Component {
   componentWillMount() {
     const {dispatch} = this.props
