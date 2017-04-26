@@ -11,10 +11,11 @@ import {
 import { connect } from 'react-redux'
 var styles = require('../styles')
 
-import { actionCreators } from '../todoListRedux'
+import { itemActionCreators } from '../actions/items'
 import ToDoList from './ToDoList'
 import { firebaseApp } from '../firebase/firebaseApp'
-//import Title from './Title'
+import { bindActionCreators } from 'redux'
+import * as ItemsActions from '../actions/items'
 
 const mapStateToProps = (state) => ({
   loading: state.loading,
@@ -22,10 +23,15 @@ const mapStateToProps = (state) => ({
   items: state.items,
 })
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ItemsActions, dispatch)
+}
+
 class App extends Component {
   componentWillMount() {
     const {dispatch} = this.props
-    dispatch(actionCreators.fetchTodos())
+    dispatch(itemActionCreators.fetchTodos())
+    //this.props.fetchTodos();
   }
 
   openItem=(rowData, rowID) => {
@@ -39,9 +45,9 @@ class App extends Component {
     const {dispatch} = this.props
 
     if (index) {
-      dispatch(actionCreators.update(item, index))
+      dispatch(itemActionCreators.updateTodo(item, index))
     }else {
-      dispatch(actionCreators.add(item))
+      dispatch(itemActionCreators.addTodo(item))
     }
     this.props.navigator.pop()
   }
@@ -62,7 +68,8 @@ class App extends Component {
 
   deleteItem=(index) => {
     const {dispatch} = this.props
-    dispatch(actionCreators.delete(index))
+    console.error("dispatch:"+dispatch)
+    dispatch(itemActionCreators.deleteTodo(index))
   }
 
   logout= async () => {
@@ -157,4 +164,4 @@ const NavigationBarRouteMapper = props => ({
   }
 })
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps/*, mapDispatchToProps*/)(App)

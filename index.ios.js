@@ -8,13 +8,21 @@ import {
   Navigator,
   AsyncStorage,
 } from 'react-native'
-import { createStore, applyMiddleware } from "redux"
 import { Provider } from 'react-redux'
-import { persistStore, autoRehydrate } from 'redux-persist'
+import App from './app/components/App'
+import ToDoEdit from './app/components/ToDoEdit'
+import Login from './app/components/Login'
+import { firebaseApp } from './app/firebase/firebaseApp'
+import configureStore from './app/store/configureStore'
+
+const store = configureStore()
+
+/*
+import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
-import { reducer } from './app/todoListRedux'
+import { reducer } from './app/reducers/items'
 
 const logger = createLogger()
 
@@ -27,16 +35,9 @@ const store = createStore(
   ),
   //autoRehydrate()
 )
-
-// Enable persistence
-persistStore(store, {storage: AsyncStorage})
-
-import App from './app/components/App'
-import ToDoEdit from './app/components/ToDoEdit'
-import Login from './app/components/Login'
-import { firebaseApp } from './app/firebase/firebaseApp'
-
+*/
 class RN_ToDoList extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
