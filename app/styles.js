@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 var styles = StyleSheet.create({
   list: {
     flex: 1,
-    paddingTop: 20,
     backgroundColor: '#ffffff',
   },
   text: {
