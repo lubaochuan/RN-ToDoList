@@ -23,6 +23,11 @@ var styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
   },
+  input: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#ffffff',
+  },
   todo: {
     marginTop: 60,
     flex: 1,

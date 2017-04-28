@@ -28,54 +28,19 @@ var options = {
 export default class ToDoEdit extends Component {
   constructor() {
     super();
-    //this.onUpdate = this.onUpdate.bind(this);
   }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.item.txt || 'New Item'}`
+  });
 
   render() {
-    return (
-      <Navigator
-        renderScene={this.renderScene}
-        navigator={this.props.navigator}
-        navigationBar={
-          <Navigator.NavigationBar style={styles.header}
-              routeMapper={NavigationBarRouteMapper(this.props)} />
-        } />
-    )
-  }
-
-  renderScene=(route, navigator) => {
+    const { params } = this.props.navigation.state;
     return(
       <InputForm
-        item={this.props.item}
-        id={this.props.id}
-        onUpdate={this.props.onUpdate}/>
+        item={params.item}
+        id={params.id}
+        onUpdate={params.update}/>
     );
   }
 }
-
-var NavigationBarRouteMapper = props => ({
-  LeftButton(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
-          onPress={() => navigator.parentNavigator.pop()}>
-        <Text style={styles.back}>
-          {"<"}
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-  RightButton(route, navigator, index, navState) {
-    return null;
-  },
-  Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
-        <Text style={styles.pageTitle}>
-          {props.item.txt || 'New Item'}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-})
-
-module.exports = ToDoEdit;

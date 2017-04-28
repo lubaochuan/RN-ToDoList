@@ -1,3 +1,5 @@
+// handles business logic with redux managed state
+
 'use strict';
 import React, { Component } from 'react'
 import {
@@ -23,18 +25,16 @@ const mapStateToProps = (state) => ({
   items: state.items,
 })
 
-class App extends Component {
+class Container extends Component {
   componentWillMount() {
     const {dispatch} = this.props
     dispatch(itemActionCreators.fetchTodos())
-    //this.props.fetchTodos();
   }
 
   openItem=(rowData, rowID) => {
-    this.props.navigator.push({
-      id: 'ToDoEdit',
-      passProps: {item: rowData, id: rowID, update: this.updateItem}
-    });
+    this.props.navigation.navigate(
+      'Edit',
+      {item: rowData, id: rowID, update: this.updateItem});
   }
 
   updateItem=(item, index) => {
@@ -45,7 +45,7 @@ class App extends Component {
     }else {
       dispatch(itemActionCreators.addTodo(item))
     }
-    this.props.navigator.pop()
+    this.props.navigation.goBack(null)
   }
 
   /*https://facebook.github.io/react-native/docs/alert.html*/
@@ -64,7 +64,6 @@ class App extends Component {
 
   deleteItem=(index) => {
     const {dispatch} = this.props
-    console.error("dispatch:"+dispatch)
     dispatch(itemActionCreators.deleteTodo(index))
   }
 
@@ -102,62 +101,16 @@ class App extends Component {
     }
 
     return (
-      <Navigator
-        renderScene={this.renderScene}
-        navigator={this.props.navigator}
-        navigationBar={
-          <Navigator.NavigationBar style={styles.header}
-              routeMapper={NavigationBarRouteMapper(this.props)} />
-        }
-      />
-    );
-  }
-
-  renderScene=(route, navigator) => {
-    return (
       <View style={{flex:1}}>
         <ToDoList
           items={this.props.items}
           onOpenItem={this.openItem}
           onUpdateItem={this.updateItem}
           onDeleteItem={this.alertMenu}
-          navigator={navigator} />
-      </View>);
+        />
+      </View>
+    );
   }
 }
 
-const NavigationBarRouteMapper = props => ({
-  LeftButton(route, navigator, index, navState) {
-    return null
-  },
-  RightButton(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
-          onPress={
-            async () => {
-              console.log('try to logout')
-              try {
-                await firebaseApp.auth().signOut();
-                navigator.parentNavigator.pop()
-              } catch (error) {
-                console.log(error);
-              }
-            }}>
-        <Text style={styles.back}>
-          {"Log Out"}
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-  Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
-        <Text style={styles.pageTitle}>
-          {'TO DOs'}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-})
-
-export default connect(mapStateToProps/*, mapDispatchToProps*/)(App)
+export default connect(mapStateToProps)(Container)

@@ -29,6 +29,7 @@ export default class InputForm extends Component {
     var value = form.getValue()
     //console.log('value: '+JSON.stringify(value))
     if (value) {
+      console.log("onUpdate: "+ this.props.onUpdate)
       this.props.onUpdate(value, this.props.id)
     }
   }
@@ -36,7 +37,7 @@ export default class InputForm extends Component {
   render() {
     const {item} = this.props
     return(
-      <View style={styles.todo}>
+      <View style={styles.input}>
         <Form
           ref="form"
           type={ToDo}

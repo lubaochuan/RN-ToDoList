@@ -7,13 +7,13 @@ export const types = {
 }
 
 export const itemActionCreators = {
-  add: (item) => {
+  addTodo: (item) => {
     return {type: types.ADD, payload: item}
   },
-  update: (item, index) => {
+  updateTodo: (item, index) => {
     return {type: types.UPDATE, payload: {item: item, index: index}}
   },
-  delete: (index) => {
+  deleteTodo: (index) => {
     return {type: types.DELETE, payload: index}
   },
   fetchTodos: () => async (dispatch, getState) => {
