@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
     case types.DELETE_TODO_SUCCESS: {
       return {
         ...state,
-        onlineList: state.onlineList.filter((todo, i) => i != action.id),
+        onlineList: state.onlineList.filter((todo) => todo.id != action.id),
       }
     }
     default:
