@@ -16,19 +16,18 @@ var styles = require('../styles')
 import { itemActionCreators } from '../actions/items'
 import ToDoList from './ToDoList'
 import { firebaseApp } from '../firebase/firebaseApp'
-import { bindActionCreators } from 'redux'
 import * as ItemsActions from '../actions/items'
 
 const mapStateToProps = (state) => ({
   loading: state.loading,
   error: state.error,
-  items: state.items,
+  items: state.onlineList,
 })
 
 class Container extends Component {
   componentWillMount() {
     const {dispatch} = this.props
-    dispatch(itemActionCreators.fetchTodos())
+    //dispatch(itemActionCreators.loadOnlineTodos())
   }
 
   openItem=(rowData, rowID) => {
@@ -37,11 +36,11 @@ class Container extends Component {
       {item: rowData, id: rowID, update: this.updateItem});
   }
 
-  updateItem=(item, index) => {
+  updateItem=(item, id) => {
     const {dispatch} = this.props
 
-    if (index) {
-      dispatch(itemActionCreators.updateTodo(item, index))
+    if (id) {
+      dispatch(itemActionCreators.updateTodo(item, id))
     }else {
       dispatch(itemActionCreators.addTodo(item))
     }
@@ -50,11 +49,12 @@ class Container extends Component {
 
   /*https://facebook.github.io/react-native/docs/alert.html*/
   alertMenu=(rowData, rowID) => {
+    console.dir("rowData.id: "+rowData.id)
     Alert.alert(
       'Quick Menu',
       null,
       [
-        {text: 'Delete', onPress: ()=>this.deleteItem(rowID)},
+        {text: 'Delete', onPress: ()=>this.deleteItem(rowData.id)},
         {text: 'Edit', onPress: ()=>this.openItem(rowData, rowID)},
         {text: 'Cancel'}
       ],
@@ -62,9 +62,9 @@ class Container extends Component {
     )
   }
 
-  deleteItem=(index) => {
+  deleteItem=(id) => {
     const {dispatch} = this.props
-    dispatch(itemActionCreators.deleteTodo(index))
+    dispatch(itemActionCreators.deleteTodo(id))
   }
 
   logout= async () => {
@@ -106,7 +106,7 @@ class Container extends Component {
           items={this.props.items}
           onOpenItem={this.openItem}
           onUpdateItem={this.updateItem}
-          onDeleteItem={this.alertMenu}
+          showAlertMenu={this.alertMenu}
         />
       </View>
     );

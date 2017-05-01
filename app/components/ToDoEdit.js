@@ -39,7 +39,7 @@ export default class ToDoEdit extends Component {
     return(
       <InputForm
         item={params.item}
-        id={params.id}
+        id={params.item.id}
         onUpdate={params.update}/>
     );
   }

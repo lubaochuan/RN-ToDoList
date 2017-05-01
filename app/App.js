@@ -13,8 +13,10 @@ import {
 import { Provider } from 'react-redux'
 import Container from './components/Container'
 import configureStore from './store/configureStore'
+import { syncFirebase } from './firebase/firebaseApp'
 
 const store = configureStore()
+syncFirebase(store)
 
 export default class App extends Component {
   render() {

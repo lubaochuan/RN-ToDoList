@@ -19,11 +19,12 @@ const ds = new ListView.DataSource({rowHasChanged})
 export default class ToDoList extends Component {
   renderItem = (rowData, sectionID, rowID) => {
     const {txt, complete} = rowData
+    console.log("rowData.id: "+rowData.id)
     return (
       <TouchableHighlight
         style={styles.item}
         onPress={() => this.props.onOpenItem(rowData, rowID)}
-        onLongPress={() => this.props.onDeleteItem(rowData, rowID)}>
+        onLongPress={() => this.props.showAlertMenu(rowData)}>
         <View sytle={styles.item}>
           <Text style={[styles.text, complete && styles.completed]}>
             {txt}

@@ -2,28 +2,24 @@ import { types } from '../actions/items'
 
 // Initial state of the store
 const initialState = {
-  loading: true,
+  loading: false,
   error: false,
-  items: [
-    {txt: 'Read a book', complete: false},
-    {txt: 'Take a walk', complete: true},
-    {txt: 'Do homework', complete: true},
-  ]
+  onlineList: []
 }
 
 export default (state = initialState, action) => {
-  const {items} = state
-  const {type, payload, error} = action
+  const {onlineList} = state
+  const {type, items, error} = action
 
   switch (type) {
-    case types.FETCH_TODOS_REQUEST: {
+    case types.LOAD_ONLINE_TODOS: {
       return {
         ...state,
         loading: true,
         error: false
       }
     }
-    case types.FETCH_TODOS_RESPONSE: {
+    case types.ONLINE_TODOS_LOADED: {
       if (error) {
         return {
           ...state,
@@ -34,26 +30,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        items: [...items, ...payload]
+        onlineList: items
       }
     }
-    case types.ADD: {
+    case types.ADD_TODO_SUCCESS: {
+      list = state.onlineList.concat([action.item])
+
       return {
         ...state,
-        items: [payload, ...items],
+        onlineList: list
       }
     }
-    case types.UPDATE: {
-      items[payload.index] = payload.item
+    case types.UPDATE_TODO_SUCCESS: {
+      list = state.onlineList.map(
+        (item) => action.item.id == item.id ? action.item : item);
+
       return {
         ...state,
-        items: [...items],
+        onlineList: list,
       }
     }
-    case types.DELETE: {
+    case types.DELETE_TODO_SUCCESS: {
       return {
         ...state,
-        items: items.filter((todo, i) => i != payload),
+        onlineList: state.onlineList.filter((todo, i) => i != action.id),
       }
     }
     default:
