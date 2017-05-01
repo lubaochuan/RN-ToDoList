@@ -71,3 +71,12 @@ You need to create a [Firebase app](https://firebase.google.com/) and enable [us
 cp config.js.example config.js
 ```
 Update config.js with your Firebase app credentials.
+
+# Step 10
+Use "react-navigation" for navigation and manage todos in firebase via redux.
+
+The recipes can be found at
+- https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4
+- https://github.com/bruz/react-native-redux-groceries
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/4e5dd2fef717e430aa06042e684493f7348f235a)
