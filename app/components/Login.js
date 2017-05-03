@@ -47,6 +47,11 @@ class Login extends Component {
       },
       response: ''
     }
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if(user){
+        this.props.dispatch(userActionCreators.userAuthorized())
+      }
+    });
   }
 
   onChange=(value) => {
