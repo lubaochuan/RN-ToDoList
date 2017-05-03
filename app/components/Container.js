@@ -19,7 +19,8 @@ import { firebaseApp } from '../firebase/firebaseApp'
 import * as ItemsActions from '../actions/items'
 
 const mapStateToProps = (state) => ({
-  loading: state.loading,
+  authorizing: state.authorizing,
+  authorized: state.authorized,
   error: state.error,
   items: state.onlineList,
 })

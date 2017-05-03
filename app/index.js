@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { TodosStack } from './config/router';
+import App from './App'
 
 class RN_ToDoList extends Component {
   render() {
-    return <TodosStack />;
+    return <App />;
   }
 }
 

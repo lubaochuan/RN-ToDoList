@@ -66,5 +66,15 @@ export const itemActionCreators = {
       console.log("The loadOnlineTodos failed: " + errorObject.code)
       dispatch({type: types.ONLINE_TODOS_LOADED, items:errorObject, error: true})
     })
+  },
+  startAuthorizing: () => {
+    return {
+      type: 'USER_START_AUTHORIZING'
+    }
+  },
+  userAuthorized: () => {
+    return {
+      type: 'USER_AUTHORIZED'
+    }
   }
 }

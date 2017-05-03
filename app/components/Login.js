@@ -5,8 +5,9 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native'
-
+import { connect } from 'react-redux'
 import { firebaseApp } from '../firebase/firebaseApp'
+import { userActionCreators } from '../actions/user'
 
 var styles = require('../styles')
 
@@ -36,7 +37,7 @@ var options = {
   }
 };
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -82,9 +83,7 @@ export default class Login extends Component {
       this.clearForm()
 
       setTimeout(() => {
-        this.props.navigator.push({
-          id: "ToDoList"
-        })
+        this.props.dispatch(userActionCreators.userAuthorized())
       }, 1000);
     } catch (error) {
       this.setState({
@@ -155,3 +154,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect()(Login);

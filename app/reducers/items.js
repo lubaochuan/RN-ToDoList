@@ -1,8 +1,11 @@
 import { types } from '../actions/items'
+import { userActionTypes } from '../actions/user'
 
 // Initial state of the store
 const initialState = {
-  loading: false,
+  uid: null,
+  authorizing: false,
+  authorized: false,
   error: false,
   onlineList: []
 }
@@ -23,7 +26,7 @@ export default (state = initialState, action) => {
       if (error) {
         return {
           ...state,
-          loading:false,
+          loading: false,
           error: true
         }
       }
@@ -54,6 +57,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         onlineList: state.onlineList.filter((todo) => todo.id != action.id),
+      }
+    }
+    case userActionTypes.USER_START_AUTHORIZING: {
+      return {
+        ...state,
+        authorizing: true
+      }
+    }
+    case userActionTypes.USER_AUTHORIZED: {
+      console.log("USER_AUTHORIZED received")
+      return {
+        ...state,
+        authorizing: false,
+        authorized: true
+      }
+    }
+    case userActionTypes.USER_SIGNED_OUT: {
+      console.log("USER_SIGNED_OUT received")
+      return {
+        ...state,
+        authorizing: false,
+        authorized: false
       }
     }
     default:

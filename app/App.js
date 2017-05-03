@@ -10,20 +10,36 @@ import {
   Navigator,
   AsyncStorage,
 } from 'react-native'
-import { Provider } from 'react-redux'
-import Container from './components/Container'
+import { Provider, connect } from 'react-redux'
+import Login from './components/Login'
 import configureStore from './store/configureStore'
 import { syncFirebase } from './firebase/firebaseApp'
+import { Tabs } from './config/router';
 
 const store = configureStore()
 syncFirebase(store)
 
-export default class App extends Component {
+const LoginOrHome = connect(
+  (state) => ({
+    authorized: state.authorized
+  })
+)(({ authorized, dispatch }) => {
+  if (authorized) {
+    return (<Tabs />);
+  }else{
+    //dispatch(checkUserExists());
+    return (<Login />);
+  }
+});
+
+class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Container navigation={this.props.navigation} />
+        <LoginOrHome />
       </Provider>
-    )
+    );
   }
 }
+
+export default App;
