@@ -78,7 +78,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authorizing: false,
-        authorized: false
+        authorized: false,
+        onlineList: [] //clear list
       }
     }
     default:

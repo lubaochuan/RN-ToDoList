@@ -47,11 +47,6 @@ class Login extends Component {
       },
       response: ''
     }
-    firebaseApp.auth().onAuthStateChanged((user) => {
-      if(user){
-        this.props.dispatch(userActionCreators.userAuthorized())
-      }
-    });
   }
 
   onChange=(value) => {
@@ -64,13 +59,17 @@ class Login extends Component {
       response: ''})
   }
 
-  handleRegister= async () => {
+  handleRegister = () => {
     try {
-      await firebaseApp.auth().createUserWithEmailAndPassword(
+      firebaseApp.auth().createUserWithEmailAndPassword(
         this.state.value.email, this.state.value.password)
-      this.setState({
-        response: 'Success! Your account is created.'
-      });
+        .then(() => {
+          this.setState({
+            response: 'Success! Your account is created.'
+          })
+        }, function(error) {
+
+        })
     } catch (error) {
       this.setState({
         response: error.toString()
@@ -78,18 +77,23 @@ class Login extends Component {
     }
   }
 
-  handleLogin=async () => {
+  handleLogin = () => {
     try {
-      await firebaseApp.auth().signInWithEmailAndPassword(
+      firebaseApp.auth().signInWithEmailAndPassword(
         this.state.value.email, this.state.value.password)
-      this.setState({
+        .then(() => {
+
+        }, function(error) {
+
+        })
+/*      this.setState({
         response: "Logged In!"
       });
       this.clearForm()
 
       setTimeout(() => {
         this.props.dispatch(userActionCreators.userAuthorized())
-      }, 1000);
+      }, 1000); */
     } catch (error) {
       this.setState({
         response: error.toString()

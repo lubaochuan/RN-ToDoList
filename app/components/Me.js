@@ -33,11 +33,15 @@ class Me extends Component {
     }
   }
 
-  handleSignout = async () => {
+  handleSignout = () => {
     try {
       this.setState({signingOut:true})
-      await firebaseApp.auth().signOut();
-      this.props.dispatch(userActionCreators.userSignedOut())
+      firebaseApp.auth().signOut()
+      .then(() => {
+        this.props.dispatch(userActionCreators.userSignedOut())
+      }, function(error) {
+
+      })
     } catch (error) {
       console.log(error);
     }
