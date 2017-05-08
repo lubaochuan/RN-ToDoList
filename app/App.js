@@ -49,7 +49,6 @@ class App extends Component {
     if (uid) {
       return (<Tabs />)
     }else{
-      //dispatch(checkUserExists());
       return (<Login />)
     }
   }
