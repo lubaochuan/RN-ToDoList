@@ -6,8 +6,8 @@ import {
 } from 'react-native'
 import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { firebaseApp } from '../firebase/firebaseApp'
-import { userActionCreators } from '../actions/user'
+import * as firebase from "firebase"
+import { USER_SIGNED_OUT } from '../actions/user'
 var styles = require('../styles')
 
 class Me extends Component {
@@ -20,7 +20,7 @@ class Me extends Component {
     }
   }
   componentDidMount() {
-    const user = firebaseApp.auth().currentUser
+    const user = firebase.auth().currentUser
     console.log("currentUser: "+user)
     if (user != null) {
       const id = user.uid
@@ -36,9 +36,9 @@ class Me extends Component {
   handleSignout = () => {
     try {
       this.setState({signingOut:true})
-      firebaseApp.auth().signOut()
+      firebase.auth().signOut()
       .then(() => {
-        this.props.dispatch(userActionCreators.userSignedOut())
+        //this.props.dispatch(userActionCreators.userSignedOut())
       }, function(error) {
 
       })

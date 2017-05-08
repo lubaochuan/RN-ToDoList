@@ -13,22 +13,17 @@ import {
 import { connect } from 'react-redux'
 var styles = require('../styles')
 
-import { itemActionCreators } from '../actions/items'
+import { addTodo, updateTodo, deleteTodo } from '../actions/items'
 import ToDoList from './ToDoList'
-import { firebaseApp } from '../firebase/firebaseApp'
-import * as ItemsActions from '../actions/items'
 
 const mapStateToProps = (state) => ({
-  authorizing: state.authorizing,
-  authorized: state.authorized,
-  error: state.error,
-  items: state.onlineList,
+  uid: state.uid,
+  items: state.todos
 })
 
 class Container extends Component {
   componentWillMount() {
     const {dispatch} = this.props
-    //dispatch(itemActionCreators.loadOnlineTodos())
   }
 
   openItem=(rowData, rowID) => {
@@ -38,12 +33,12 @@ class Container extends Component {
   }
 
   updateItem=(item, id) => {
-    const {dispatch} = this.props
+    const {dispatch, uid} = this.props
 
     if (id) {
-      dispatch(itemActionCreators.updateTodo(item, id))
+      dispatch(updateTodo(uid, item, id))
     }else {
-      dispatch(itemActionCreators.addTodo(item))
+      dispatch(addTodo(uid, item))
     }
     this.props.navigation.goBack(null)
   }
@@ -64,20 +59,8 @@ class Container extends Component {
   }
 
   deleteItem=(id) => {
-    const {dispatch} = this.props
-    dispatch(itemActionCreators.deleteTodo(id))
-  }
-
-  logout= async () => {
-    console.log('try to logout')
-    try {
-      await firebaseApp.auth().signOut();
-      this.props.navigator.push({
-        name: "Login"
-      })
-    } catch (error) {
-      console.log(error);
-    }
+    const {dispatch, uid} = this.props
+    dispatch(deleteTodo(uid, id))
   }
 
   render() {

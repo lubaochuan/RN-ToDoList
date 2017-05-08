@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { firebaseApp } from '../firebase/firebaseApp'
+import * as firebase from 'firebase'
 import { userActionCreators } from '../actions/user'
 
 var styles = require('../styles')
@@ -61,7 +61,7 @@ class Login extends Component {
 
   handleRegister = () => {
     try {
-      firebaseApp.auth().createUserWithEmailAndPassword(
+      firebase.auth().createUserWithEmailAndPassword(
         this.state.value.email, this.state.value.password)
         .then(() => {
           this.setState({
@@ -79,12 +79,14 @@ class Login extends Component {
 
   handleLogin = () => {
     try {
-      firebaseApp.auth().signInWithEmailAndPassword(
+      firebase.auth().signInWithEmailAndPassword(
         this.state.value.email, this.state.value.password)
         .then(() => {
 
-        }, function(error) {
-
+        }, (error) => {
+          this.setState({
+            response: error.toString()
+          })
         })
 /*      this.setState({
         response: "Logged In!"
@@ -105,7 +107,7 @@ class Login extends Component {
   handleResetPassword= () => {
     if (this.state.value.email) {
       try {
-        firebaseApp.auth().sendPasswordResetEmail(this.state.value.email)
+        firebase.auth().sendPasswordResetEmail(this.state.value.email)
         .then(() => {
           this.setState({
             response: "Reset email sent!"

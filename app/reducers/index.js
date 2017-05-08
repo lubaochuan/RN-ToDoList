@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
-import itemsReducer from './items'
+import todos from './items'
+import uid from './user'
 
-export default combineReducers({
-  items: itemsReducer
+const reducers = combineReducers({
+  uid,
+  todos
 })
+
+export default reducers

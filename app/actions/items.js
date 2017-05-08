@@ -1,80 +1,49 @@
-import { itemsRef } from '../firebase/firebaseApp'
+import Database from "../firebase/database"
 
-export const types = {
-  LOAD_ONLINE_TODOS: 'LOAD_ONLINE_TODOS',
-  ONLINE_TODOS_LOADED: 'ONLINE_TODOS_LOADED',
-  ADD_TODO: 'ADD_TODO',
-  ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
-  UPDATE_TODO: 'UPDATE_TODO',
-  UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
-  DELETE_TODO: 'DELETE_TODO',
-  DELETE_TODO_SUCCESS: 'DELETE_TODO_SUCCESS'
+export const ADD_TODO = 'ADD_TODO'
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS'
+export const UPDATE_TODO = 'UPDATE_TODO'
+export const UPDATE_TODO_SUCCESS = 'UPDATE_TODO_SUCCESS'
+export const DELETE_TODO = 'DELETE_TODO'
+export const DELETE_TODO_SUCCESS = 'DELETE_TODO_SUCCESS'
+export const CLEAR_TODOS = 'CLEAR_TODOS'
+
+export function addTodo(uid, item){
+  Database.addTodo(uid, item)
+  return {type: ADD_TODO}
 }
 
-export const itemActionCreators = {
-  addTodo: (item) => {
-    const id = Math.random().toString(36).substring(7)
-    const itemRef = itemsRef.child(id)
-    itemRef.set({
-      id: id,
-      txt: item.txt,
-      complete: item.complete
-    })
-    return {type: types.ADD_TODO}
-  },
-  addTodoSuccess: (item) => {
-    return {
-      type: types.ADD_TODO_SUCCESS,
-      item: item
-    }
-  },
-  updateTodo: (item, id) => {
-    item = {...item, id:id}
-    itemsRef.child(id).set(item)
-    return {type: types.UPDATE_TODO}
-  },
-  updateTodoSuccess: (item) => {
-    return {
-      type: types.UPDATE_TODO_SUCCESS,
-      item: item
-    }
-  },
-  deleteTodo: (id) => {
-    itemsRef.child(id).remove()
-    return {type: types.DELETE_TODO}
-  },
-  deleteTodoSuccess: (id) => {
-    return {
-      type: types.DELETE_TODO_SUCCESS,
-      id: id
-    }
-  },
-  loadOnlineTodos: () => (dispatch, getState) => {
-    dispatch({type: types.LOAD_ONLINE_TODOS})
-    itemsRef.on("value", function(snapshot) {
-      console.log("items: ", snapshot.val());
-      var items = [];
-      snapshot.forEach((child) => {
-        items.push({
-          id: child.val().id,
-          txt: child.val().txt,
-          complete: child.val().complete
-        })
-      });
-      dispatch({type: types.ONLINE_TODOS_LOADED, items:items})
-    }, function (errorObject) {
-      console.log("The loadOnlineTodos failed: " + errorObject.code)
-      dispatch({type: types.ONLINE_TODOS_LOADED, items:errorObject, error: true})
-    })
-  },
-  startAuthorizing: () => {
-    return {
-      type: 'USER_START_AUTHORIZING'
-    }
-  },
-  userAuthorized: () => {
-    return {
-      type: 'USER_AUTHORIZED'
-    }
+export function addTodoSuccess(item){
+  return {
+    type: ADD_TODO_SUCCESS,
+    item: item
   }
+}
+
+export function updateTodo(uid, item, id){
+  Database.updateTodo(uid, item, id)
+  return {type: UPDATE_TODO}
+}
+
+export function updateTodoSuccess(item){
+  return {
+    type: UPDATE_TODO_SUCCESS,
+    item: item
+  }
+}
+
+export function deleteTodo(uid, id){
+  Database.deleteTodo(uid, id)
+  return {type: DELETE_TODO}
+}
+
+export function deleteTodoSuccess(id){
+  return {
+    type: DELETE_TODO_SUCCESS,
+    id: id
+  }
+}
+
+export function clearTodos(){
+  return {type: CLEAR_TODOS}
 }
