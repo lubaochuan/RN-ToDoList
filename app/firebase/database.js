@@ -25,12 +25,10 @@ export default class Database {
   }
 
   static addTodo(uid, item) {
-    const id = Math.random().toString(36).substring(7)
-    console.log("uid: "+uid)
     let userPath = "/users/" + uid + "/items"
-    const itemRef = firebase.database().ref(userPath).child(id)
+    const itemRef = firebase.database().ref(userPath).push()
     itemRef.set({
-      id: id,
+      id: itemRef.key,
       txt: item.txt,
       complete: item.complete
     })
