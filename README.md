@@ -80,3 +80,18 @@ The recipes can be found at
 - https://github.com/bruz/react-native-redux-groceries
 
 [solution](https://github.com/lubaochuan/RN-ToDoList/tree/4e5dd2fef717e430aa06042e684493f7348f235a)
+
+# Step 11
+Set the following rules to protect user data in firebase.
+```
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".write": "$uid === auth.uid",
+    		".read": "$uid === auth.uid"
+      }
+    }
+  }
+}
+```
