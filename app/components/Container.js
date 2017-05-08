@@ -45,7 +45,6 @@ class Container extends Component {
 
   /*https://facebook.github.io/react-native/docs/alert.html*/
   alertMenu=(rowData, rowID) => {
-    console.dir("rowData.id: "+rowData.id)
     Alert.alert(
       'Quick Menu',
       null,
