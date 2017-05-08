@@ -67,8 +67,10 @@ class Login extends Component {
           this.setState({
             response: 'Success! Your account is created.'
           })
-        }, function(error) {
-
+        }, (error) => {
+          this.setState({
+            response: error.toString()
+          })
         })
     } catch (error) {
       this.setState({
