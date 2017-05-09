@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Login from './components/Login'
-import { Tabs } from './config/router'
+import TabBarNavigation from './components/tabBar/views/TabBarNavigation'
 import Firebase from './firebase/firebaseApp'
 import Database from './firebase/database'
 import {
@@ -45,9 +45,9 @@ class App extends Component {
   }
 
   render() {
-    const {uid, dispatch} = this.props
+    const {uid} = this.props
     if (uid) {
-      return (<Tabs />)
+      return (<TabBarNavigation />)
     }else{
       return (<Login />)
     }

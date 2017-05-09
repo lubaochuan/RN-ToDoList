@@ -11,9 +11,9 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
-var styles = require('../styles')
+var styles = require('../../../styles')
 
-import { addTodo, updateTodo, deleteTodo } from '../actions/items'
+import { addTodo, updateTodo, deleteTodo } from '../../../actions/items'
 import ToDoList from './ToDoList'
 
 const mapStateToProps = (state) => ({
@@ -24,6 +24,7 @@ const mapStateToProps = (state) => ({
 class Container extends Component {
   componentWillMount() {
     const {dispatch} = this.props
+    console.dir(this.props.items)
   }
 
   openItem=(rowData, rowID) => {

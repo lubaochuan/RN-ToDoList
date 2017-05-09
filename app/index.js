@@ -5,9 +5,7 @@ import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
 import { Provider } from 'react-redux'
 import App from './App'
-import configureStore from './store/configureStore'
-
-const store = configureStore()
+import store from './store/configureStore'
 
 console.disableYellowBox = true;
 

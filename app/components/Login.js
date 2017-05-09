@@ -94,7 +94,6 @@ class Login extends Component {
         response: "Logged In!"
       });
       this.clearForm()
-
       setTimeout(() => {
         this.props.dispatch(userActionCreators.userAuthorized())
       }, 1000); */

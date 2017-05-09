@@ -7,8 +7,8 @@ import {
 import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import * as firebase from "firebase"
-import { USER_SIGNED_OUT } from '../actions/user'
-var styles = require('../styles')
+import { USER_SIGNED_OUT } from '../../../actions/user'
+var styles = require('../../../styles')
 
 class Me extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class Me extends Component {
       this.setState({signingOut:true})
       firebase.auth().signOut()
       .then(() => {
-        //this.props.dispatch(userActionCreators.userSignedOut())
+        this.props.navigation.dispatch({type:'JUMP_TO_TAB', payload:{index:0}})
       }, function(error) {
 
       })

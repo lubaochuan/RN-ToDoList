@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-var styles = require('../styles');
+var styles = require('../../../styles');
 
 // Row comparison function
 // source: http://www.reactnativeexpress.com/listview
@@ -19,7 +19,6 @@ const ds = new ListView.DataSource({rowHasChanged})
 export default class ToDoList extends Component {
   renderItem = (rowData, sectionID, rowID) => {
     const {txt, complete} = rowData
-    console.log("rowData.id: "+rowData.id)
     return (
       <TouchableHighlight
         style={styles.item}

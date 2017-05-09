@@ -8,7 +8,7 @@ import {
   Navigator,
   TouchableOpacity,
 } from 'react-native'
-var styles = require('../styles')
+var styles = require('../../../styles')
 import InputForm from './InputForm'
 var t = require('tcomb-form-native')
 let Form = t.form.Form
