@@ -95,3 +95,11 @@ Set the following rules to protect user data in firebase.
   }
 }
 ```
+All user data will be stored under a subtree with a name matching the user id.
+
+# Step 12
+Refactor to use redux to manage react-navigation's   navigator state.
+
+The recipe can be found at https://medium.com/@parkerdan/react-navigation-with-complete-redux-state-management-tab-bar-and-multiple-navigators-ed30a69d9a4d
+
+[solution](https://github.com/lubaochuan/RN-ToDoList/tree/4bdebbebbf777eb9aad0dada4f7fef5b55c865d0)
