@@ -24,7 +24,6 @@ const mapStateToProps = (state) => ({
 class Container extends Component {
   componentWillMount() {
     const {dispatch} = this.props
-    console.dir(this.props.items)
   }
 
   openItem=(rowData, rowID) => {
